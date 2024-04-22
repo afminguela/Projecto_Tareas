@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOM manipulation</title>
+    <link href="output.css" rel="stylesheet" />
+  </head>
+  <body class="main__container mx-[10vw]">
+    <!-- Beginning of Code -->
+
+    <!-- 
+[ ] Afegeix estils.
+Tot ha d'estar centrat.
+Les imatges s'han d'emplaçar seguint una graella de 4 elements d'amplada.  -->
+
+    <!-- El Titulo-->
+    <h1 class="font-sans font-extrabold text-6xl" style="text-align: center">
+      My Portfolio
+    </h1>
+
+    <hr class="border-red-200 border-2">
+
+    <!--- Contenedor de Arriba del todo-->
+    <div class="destacado grid grid-cols-2 m-44">
+
+      <!-- div muy destacado-->
+
+    </div>
+
+    <!-- Las imágenes en un contenedor de 4 columnas -->
+    <div class="projectContainer grid grid-cols-4 space-x-4"></div>
+
+    <!-- El formulario de entrada de URL, Txt y lo que sea, con un botón -->
+    <div id="formulario" class="form__container flex justify-center my-11">
+
+
+      <form class="object-bottom w-28">
+        <label for="form-image">Image URL</label>
+        <input
+          type="url"
+          id="form-URL"
+          class="form-URL border-red-500 border-2 rounded-md px-2"
+          placeholder="Your URL here"
+          required
+        />
+
+        <label for="form-title">Título</label>
+        <input
+          type="text"
+          id="form-title"
+          class="form-title border-red-500 border-2 rounded-md px-2"
+        />
+
+        <label for="form-description">Descripción</label>
+        <textarea
+          type="text"
+          id="form-description"
+          class="form-description border-red-500 border-2 rounded-md px-2"
+        >
+        </textarea>
+
+        <button
+          id="boton"
+          class="border bg-green-600 rounded-md px-3"
+          onClick="submitProject()"
+        >
+          Submit project!
+        </button>
+      </form>
+    </div>
+
+    <!-- End of Code -->
+    <script type="text/javascript" src="./index.js"></script>
+  </body>
+</html>
