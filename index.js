@@ -1,5 +1,5 @@
-let projectContainer = document.querySelector(".projectContainer"); // div de 4 columnas
-let projects = JSON.parse(localStorage.getItem("projects"));
+let tareasContainer = document.querySelector(".projectContainer"); // div de 4 columnas
+let tareas = JSON.parse(localStorage.getItem("projects"));
 console.log(projects);
 
 // class Project (titulo, imageURL, descripcion) {
