@@ -3,3 +3,18 @@
 @tailwind utilities;
 
 
+body {
+    @apply leading-[normal] m-[10vw] ;
+  }
+  *,
+  ::before,
+  ::after {
+    border-width: 0;
+  }
+
+  .indie-flower-regular {
+    font-family: "Indie Flower", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
