@@ -4,7 +4,7 @@
 
 
 body {
-    @apply leading-[normal] m-[10vw] ;
+    @apply leading-[normal] m-[10vw] bg-[url('src/textura_papel.jpg')];
   }
   *,
   ::before,

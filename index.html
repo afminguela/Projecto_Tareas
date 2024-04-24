@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Task Manager</title>
     <link href="output.css" rel="stylesheet" />
-    
+
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Indie Flower:wght@400&display=swap"
@@ -16,12 +16,12 @@
       href="https://fonts.googleapis.com/css2?family=SF Pro:wght@400&display=swap"
     />
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
-      </style>
-      
+      @import url("https://fonts.googleapis.com/css2?family=Indie+Flower&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+    </style>
   </head>
 
-  <body class="main__container mx-[10vw] ">
+  <body class=" mx-[10vw] bg-[url('./src/textura_papel.jpg')]">
+    
     <h1
       class="font-indie-flower font-extrabold text-6xl text-blue-800"
       style="text-align: center"
@@ -32,33 +32,107 @@
     <!-- Aqui va el formulario de recogida de datos-->
 
     
-
-    <div id="formulario" class="FormularioNueva w-80 h-96 relative">
-      
-        
-   
-      <form class="tareaNombre w-80 h-24 left-[3px] top-0 absolute flex flex-col">
-        
-        <label for="tareaNombre" class="labelNombre w-64 h-10 left-0 top-0  text-blue-800 text-3xl font-normal font-indie-flower">Nombre de Tarea:</label>
+      <form
+        class="formulario_2  flex flex-col"
+      >
+        <label
+          for="tareaNombre"
+          class="labelNombre w-64 h-10 left-0 top-0 text-blue-800 text-3xl font-normal font-indie-flower"
+          >Nombre de Tarea:</label
+        >
         <input
           type="text"
           id="tareaNombre"
-          class="tareaNombre border bg-zinc-300 rounded-md px-2  text-blue-800 text-3xl font-normal font-indie-flower"
+          class="tareaNombre border bg-zinc-300 rounded-md px-2 text-blue-800 text-3xl font-normal font-indie-flower"
           placeholder="Barrer..."
           required
         />
 
-        <div class="tareaFecha w-40 h-20 left-[163.04px] top-[89.67px] ">
-          <label class="LabelData w-32 h-9 left-[7.89px] top-0  text-blue-800 text-3xl font-normal font-['Indie Flower']">Fecha </label>
-          <input type="date" name="tareaFecha" id="tareaFecha" class="tareaFecha  bg-zinc-300 border rounded-md px-2  text-blue-800 text-3xl font-normal font-indie-flower"
-          placeholder="Barrer el patio..."
-          required
+        <div class="divFecha w-40 h-20 left-[163.04px] top-[89.67px]">
+          <label
+            class="LabelData w-32 h-9 left-[7.89px] top-0 text-blue-800 text-3xl font-normal font-['Indie Flower']"
+            >Fecha
+          </label>
+          <input
+            type="date"
+            name="tareaFecha"
+            id="tareaFecha"
+            class="tareaFecha bg-zinc-300 border rounded-md px-2 text-blue-800 text-3xl font-normal font-indie-flower"
+            placeholder="Barrer el patio..."
+            required
           />
-          
-          
         </div>
-        <label for="tareaAsignada" class=" text-blue-800 text-3xl font-normal font-indie-flower">Asignada a:</label>
+        <label
+          for="tareaAsignada"
+          class="text-blue-800 text-3xl font-normal font-indie-flower"
+          >Asignada a:</label
+        >
         <input
           type="text"
           id="tareaAsignada"
-          class="tareaAsignada border bg-zinc-300 rounded-md px-2  text-blue-
+          class="tareaAsignada border bg-zinc-300 rounded-md px-2 text-blue-800 text-3xl font-normal font-indie-flower"
+          placeholder="Jose Luis"
+          required
+        />
+<!-- Text Area de Descripción-->
+        <label
+          for="tareaDescripcion"
+          class="text-blue-800 text-3xl font-normal font-indie-flower"
+          >Descripción:</label
+        >
+        <textarea
+          type="text"
+          id="tareaDescripcion"
+          class="tareaDescripcion bg-zinc-300 border rounded-md px-2 text-blue-800 text-3xl font-normal font-indie-flower"
+          rows="5" cols="33"
+          placeholder="Barrer el patio..."
+          required
+        ></textarea>
+
+        <!-- Boton de envio de formulario en linea con el toggle-->
+<div class="flex flex-row space-x-4 ">
+        <!--  el toggle de urgente y que si está ON value = true-->
+
+        <div class="UrgenteToggle w-40 h-9 mt-[5vh] ">
+          <label
+            class="LabelUrgente w-32 h-9 text-blue-800 text-3xl font-normal font-['Indie Flower']"
+            >Urgente:
+          </label>
+          <!-- <div
+            class="Toggle w-[2vw] h-[2vh] pl-5 pr-0.5 py-0.5 bg-blue-700 rounded-full justify-end items-center inline-flex"
+          >
+            <div
+              class="Knob w-[1.5vw] h-[2vh] relative bg-white rounded-full shadow"
+            ></div>
+          </div> -->
+
+          
+        </div>
+        <button
+            id="botonSubmit"
+            class="w-40 h-11 mt-[5vh] rounded-lg border bg-zinc-300 hover:bg-blue-400 text-blue-800 text-3xl font-bold  "
+            onClick="submitTarea()"
+          >
+            <span class="text-blue-800 text-8xl font-bold font-indie-flower"
+              >Anotar!</span
+            >
+          </button>
+        </div>
+      </form>
+   
+
+    <!-- llega hasta aqui,-->
+    <hr class="border-blue-800 border-2" />
+    <!-- aqui se deberian poner todas las pastillas de tareas -->
+  
+
+    <div class="tareasContainer  w-[20vw] flex flex-col-reverse  items-center space-x-4  text-blue-800 text-lg font-normal font-['Indie Flower']">
+
+<!-- aqui van las tareas-->
+
+    </div>
+
+    <!-- aqui acaba el codigo-->
+    <script type="text/javascript" src="./index.js"></script>
+  </body>
+</html>

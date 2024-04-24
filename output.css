@@ -106,10 +106,6 @@
   --tw-contain-style:  ;
 }
 
-.absolute {
-  position: absolute;
-}
-
 .relative {
   position: relative;
 }
@@ -120,10 +116,6 @@
 
 .left-\[163\.04px\] {
   left: 163.04px;
-}
-
-.left-\[3px\] {
-  left: 3px;
 }
 
 .left-\[7\.89px\] {
@@ -138,10 +130,6 @@
   top: 89.67px;
 }
 
-.m-44 {
-  margin: 11rem;
-}
-
 .m-\[10vw\] {
   margin: 10vw;
 }
@@ -149,11 +137,6 @@
 .mx-\[10vw\] {
   margin-left: 10vw;
   margin-right: 10vw;
-}
-
-.my-\[3vh\] {
-  margin-top: 3vh;
-  margin-bottom: 3vh;
 }
 
 .mt-\[5vh\] {
@@ -168,10 +151,6 @@
   display: inline-flex;
 }
 
-.grid {
-  display: grid;
-}
-
 .h-10 {
   height: 2.5rem;
 }
@@ -184,16 +163,8 @@
   height: 5rem;
 }
 
-.h-24 {
-  height: 6rem;
-}
-
 .h-9 {
   height: 2.25rem;
-}
-
-.h-96 {
-  height: 24rem;
 }
 
 .h-\[2vh\] {
@@ -212,28 +183,28 @@
   width: 16rem;
 }
 
-.w-80 {
-  width: 20rem;
-}
-
 .w-\[1\.5vw\] {
   width: 1.5vw;
+}
+
+.w-\[20vw\] {
+  width: 20vw;
 }
 
 .w-\[2vw\] {
   width: 2vw;
 }
 
-.grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.grid-cols-4 {
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+.flex-row {
+  flex-direction: row;
 }
 
 .flex-col {
   flex-direction: column;
+}
+
+.flex-col-reverse {
+  flex-direction: column-reverse;
 }
 
 .items-center {
@@ -288,6 +259,14 @@
 .bg-zinc-300 {
   --tw-bg-opacity: 1;
   background-color: rgb(212 212 216 / var(--tw-bg-opacity));
+}
+
+.bg-\[url\(\'\.\/src\/textura_papel\.jpg\'\)\] {
+  background-image: url('./src/textura_papel.jpg');
+}
+
+.bg-\[url\(\'src\/textura_papel\.jpg\'\)\] {
+  background-image: url('src/textura_papel.jpg');
 }
 
 .px-2 {
@@ -350,6 +329,7 @@
 
 body {
   margin: 10vw;
+  background-image: url('src/textura_papel.jpg');
   line-height: normal;
 }
 
@@ -363,5 +343,10 @@ body {
   font-family: "Indie Flower", cursive;
   font-weight: 400;
   font-style: normal;
+}
+
+.hover\:bg-blue-400:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(96 165 250 / var(--tw-bg-opacity));
 }
   
