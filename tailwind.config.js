@@ -4,7 +4,9 @@ module.exports = {
     extend: {
       backgroundImage: {
         'papel': "url('src/textura papel blanco.jpg')",
-      
+        'cuadros': "url('./src/Lined-Notebook.png')",
+        'lineas': "url('./src/papel_lineas.jpg')",
+        'cuadros2': "url('./src/papel_cuadrados.jpg')",
       },
       colors: {
         mediumblue: "#040bb6",

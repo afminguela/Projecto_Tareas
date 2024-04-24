@@ -126,20 +126,8 @@
   left: 0px;
 }
 
-.left-\[163\.04px\] {
-  left: 163.04px;
-}
-
-.left-\[7\.89px\] {
-  left: 7.89px;
-}
-
 .top-0 {
   top: 0px;
-}
-
-.top-\[89\.67px\] {
-  top: 89.67px;
 }
 
 .m-\[10vw\] {
@@ -151,16 +139,24 @@
   margin-right: 10vw;
 }
 
-.mt-\[5vh\] {
-  margin-top: 5vh;
-}
-
 .mb-5 {
   margin-bottom: 1.25rem;
 }
 
+.ml-3 {
+  margin-left: 0.75rem;
+}
+
 .ms-3 {
   margin-inline-start: 0.75rem;
+}
+
+.mt-\[2vh\] {
+  margin-top: 2vh;
+}
+
+.mt-\[5vh\] {
+  margin-top: 5vh;
 }
 
 .flex {
@@ -179,24 +175,20 @@
   height: 2.75rem;
 }
 
-.h-20 {
-  height: 5rem;
+.h-6 {
+  height: 1.5rem;
+}
+
+.h-8 {
+  height: 2rem;
 }
 
 .h-9 {
   height: 2.25rem;
 }
 
-.h-\[2vh\] {
-  height: 2vh;
-}
-
-.h-6 {
-  height: 1.5rem;
-}
-
-.w-32 {
-  width: 8rem;
+.w-11 {
+  width: 2.75rem;
 }
 
 .w-40 {
@@ -205,18 +197,6 @@
 
 .w-64 {
   width: 16rem;
-}
-
-.w-\[1\.5vw\] {
-  width: 1.5vw;
-}
-
-.w-\[2vw\] {
-  width: 2vw;
-}
-
-.w-11 {
-  width: 2.75rem;
 }
 
 .flex-auto {
@@ -282,64 +262,18 @@
   border-color: rgb(30 64 175 / var(--tw-border-opacity));
 }
 
-.bg-blue-700 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(29 78 216 / var(--tw-bg-opacity));
-}
-
-.bg-white {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-
 .bg-zinc-300 {
   --tw-bg-opacity: 1;
   background-color: rgb(212 212 216 / var(--tw-bg-opacity));
 }
 
-.bg-gray-200 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
-}
-
-.bg-zinc-200 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(228 228 231 / var(--tw-bg-opacity));
-}
-
-.bg-\[url\(\'\.\/src\/textura_papel\.jpg\'\)\] {
-  background-image: url('./src/textura_papel.jpg');
-}
-
-.bg-\[url\(\'src\/textura_papel\.jpg\'\)\] {
-  background-image: url('src/textura_papel.jpg');
+.bg-cuadros2 {
+  background-image: url('./src/papel_cuadrados.jpg');
 }
 
 .px-2 {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
-}
-
-.py-0 {
-  padding-top: 0px;
-  padding-bottom: 0px;
-}
-
-.py-0\.5 {
-  padding-top: 0.125rem;
-  padding-bottom: 0.125rem;
-}
-
-.pl-5 {
-  padding-left: 1.25rem;
-}
-
-.pr-0 {
-  padding-right: 0px;
-}
-
-.pr-0\.5 {
-  padding-right: 0.125rem;
 }
 
 .text-center {
@@ -354,20 +288,16 @@
   font-size: 1.706rem;
 }
 
-.font-bold {
-  font-weight: 700;
-}
-
 .font-extrabold {
   font-weight: 800;
 }
 
-.font-normal {
-  font-weight: 400;
-}
-
 .font-medium {
   font-weight: 500;
+}
+
+.font-normal {
+  font-weight: 400;
 }
 
 .leading-\[normal\] {
@@ -379,41 +309,25 @@
   color: rgb(30 64 175 / var(--tw-text-opacity));
 }
 
-.text-gray-900 {
-  --tw-text-opacity: 1;
-  color: rgb(17 24 39 / var(--tw-text-opacity));
-}
-
-.text-zinc-300 {
-  --tw-text-opacity: 1;
-  color: rgb(212 212 216 / var(--tw-text-opacity));
-}
-
-.text-zinc-800 {
-  --tw-text-opacity: 1;
-  color: rgb(39 39 42 / var(--tw-text-opacity));
-}
-
-.text-zinc-400 {
-  --tw-text-opacity: 1;
-  color: rgb(161 161 170 / var(--tw-text-opacity));
-}
-
 .text-zinc-500 {
   --tw-text-opacity: 1;
   color: rgb(113 113 122 / var(--tw-text-opacity));
 }
 
-.shadow {
-  --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+.underline {
+  text-decoration-line: underline;
 }
 
 body {
   margin: 10vw;
-  background-image: url('src/textura_papel.jpg');
+  background-size: auto;
   line-height: normal;
+}
+
+.texto {
+  font-family: 'Indie Flower';
+  --tw-text-opacity: 1;
+  color: rgb(30 64 175 / var(--tw-text-opacity));
 }
 
 *,
@@ -497,11 +411,6 @@ body {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
-.peer:checked ~ .peer-checked\:bg-blue-600 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(37 99 235 / var(--tw-bg-opacity));
-}
-
 .peer:checked ~ .peer-checked\:bg-blue-800 {
   --tw-bg-opacity: 1;
   background-color: rgb(30 64 175 / var(--tw-bg-opacity));
@@ -550,11 +459,6 @@ body {
   .dark\:bg-gray-700 {
     --tw-bg-opacity: 1;
     background-color: rgb(55 65 81 / var(--tw-bg-opacity));
-  }
-
-  .dark\:text-gray-300 {
-    --tw-text-opacity: 1;
-    color: rgb(209 213 219 / var(--tw-text-opacity));
   }
 
   .peer:focus ~ .dark\:peer-focus\:ring-blue-800 {

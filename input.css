@@ -4,7 +4,11 @@
 
 
 body {
-    @apply leading-[normal] m-[10vw] bg-[url('src/textura_papel.jpg')];
+    @apply leading-[normal] m-[10vw] bg-auto;
+  }
+
+.texto {
+    @apply text-blue-800 font-indie-flower;
   }
   *,
   ::before,
