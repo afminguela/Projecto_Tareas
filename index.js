@@ -35,17 +35,18 @@ function printTareaCards(objetoTarea) {
  >
     <div
       class="contenedor texto"
-      style=" display: flex; flex-direction: row; align-self: flex-end; text-overflow: clip;"
+      style=" display: flex; flex-direction: row; align-self: center; justify-content: space-around; text-overflow: clip;"
     >
+     <p class="idTarea" style="text-decoration: underline; font-weight: bold; font-size: 6vh; margin-right: 7vw;  ">${objetoTarea.idTarea}</p>
       <p class="tareaNombre text-wrap">${objetoTarea.nombre}</p>
-      <p class="tareaFecha">${objetoTarea.fecha}</p>
-      <p class="idTarea" style="text-size:">${objetoTarea.idTarea}</p>
+      <p class="tareaFecha" style="margin-left: 10px;">${objetoTarea.fecha}</p>
+      
     </div>
     <p class="tareaAsignada" style="align-self:flex-start ;">
       ${objetoTarea.asignada}
     </p>
 
-    <p class="tareaDescripcion" style="align-self:flex-start ;">
+    <p class="tareaDescripcion" style="align-self:flex-start ; text-overflow: clip">
       ${objetoTarea.descripcion}
     </p>
     <div
@@ -144,34 +145,49 @@ function editarTarea(idTarea) {
          document.querySelector(".formEditarTarea").style.display = "inline-block";
 
     // Guarda el ID de la tarea que se está editando para usarlo en confirmarEdicion
-    document.querySelector(".formEditarTarea").dataset.idTarea = idTarea;
+    document.querySelector(".formEditarTarea").dataset.idTareaEditada = idTarea;
 }
-
 
 function confirmarEdicion() {
- // Obtiene el ID de la tarea que se está editando
- let idTarea = document.querySelector(".formEditarTarea").dataset.idTarea;
+    // Obtiene el ID de la tarea que se está editando
+    idTarea = document.querySelector(".formEditarTarea").dataset.idTareaEditada;
+    console.log("ID de la tarea a editar:", idTarea);
+    // Encuentra la tarea a editar
+    let tareas2 = [...tareas];
+    console.log("Tareas:", tareas2);
+    let tareaAEditar = [];
+   // tareaAEditar = tareas2.find((tarea) => tarea.idTarea == idTarea);
+    for (let tarea of tareas2) {
+        if (tarea.idTarea == idTarea) {
+            tareaAEditar = tarea;
+            break;
+        }
+    }
+    
+    
+    console.log("Tarea siendo editada:", tareaAEditar);
+    
+    // Verifica si la tarea existe antes de intentar actualizarla
+    if (!tareaAEditar) {
+       console.error("Tarea no encontrada");
+       return;
+    }
+   
+    // Actualiza la tarea con los nuevos valores
+    tareaAEditar.nombre = document.querySelector(".nombreEditar").value;
+    tareaAEditar.asignada = document.querySelector(".asignadaEditar").value;
+    tareaAEditar.fecha = document.querySelector(".fechaEditar").value;
+    tareaAEditar.descripcion = document.querySelector(".descripcionEditar").value;
  
- // Encuentra la tarea a editar
- let tarea = tareas.find((tarea) => tarea.idTarea === idTarea);
+    // Guarda la tarea actualizada en el array de tareas
+    localStorage.setItem("tareas", JSON.stringify(tareas));
  
- // Actualiza la tarea con los nuevos valores
- tarea.nombre = document.getElementById("tareaNombre").value;
- tarea.asignada = document.getElementById("tareaAsignada").value;
- tarea.fecha = document.getElementById("tareaFecha").value;
- tarea.descripcion = document.getElementById("tareaDescripcion").value;
+    // Oculta el formulario
+    document.querySelector(".formEditarTarea").style.display = "none";
  
- // Actualiza el localStorage
- localStorage.setItem("tareas", JSON.stringify(tareas));
- 
- // Oculta el formulario
- document.getElementById("formEditarTarea").style.display = "none";
- 
- // Actualiza el DOM para reflejar los cambios en la tarea
- let tareaElement = document.querySelector(`.ObjetoTarea[data-id="${idTarea}"]`);
- if (tareaElement) {
-    tareaElement.remove();
- }
- // Luego, agrega la tarea actualizada al DOM
- tareasContainer.innerHTML += printTareaCards(tarea);
-}
+    // Actualiza el DOM para reflejar los cambios en la tarea
+    let tareaElement = document.querySelector(`.ObjetoTarea[data-id="${idTarea}"]`);
+       
+    tareaElement.innerHTML = printTareaCards(tareaAEditar);
+  
+    }
