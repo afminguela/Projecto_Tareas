@@ -116,6 +116,16 @@ async function afegirTarea(nuevaTarea) {
  localStorage.setItem("tareas", JSON.stringify(tareas));
  // Actualiza el DOM para reflejar la nueva tarea
  tareasContainer.innerHTML += printTareaCards(nuevaTarea);
+    // Limpia los campos del formulario
+    document.querySelector(".tareaNombre").value = "";
+    document.querySelector(".tareaAsignada").value = "";
+    document.querySelector(".tareaFecha").value = "";
+    document.querySelector(".tareaDescripcion").value = "";
+    document.querySelector(".tareaUrgente").checked = false;
+    
+    // Llama a la función para ordenar las tareas y crear el desplegable;
+    ordenarTareasYCrearDesplegable()
+
 }
 
 // Función que elimina una tarea
@@ -203,11 +213,12 @@ function confirmarEdicion() {
 
 
 // Función para alternar entre mostrar todas las tareas y mostrar solo las tareas urgentes
+let boton = document.querySelector("#botonFiltro"); 
+    let mostrandoSoloUrgentes = boton.innerHTML;
 function alternarMostrarTareas() {
     
-   let boton = document.querySelector("#botonFiltro"); 
-    let mostrandoSoloUrgentes = boton.innerHTML;
-    console.log(mostrandoSoloUrgentes);
+   
+   ;
    if (mostrandoSoloUrgentes === "Tareas urgentes") {
         filtroTareasUrgentes();
     } else {
@@ -218,7 +229,7 @@ function alternarMostrarTareas() {
 
 // Función para filtrar y mostrar solo las tareas urgentes o mostrar todas las tareas
 function filtroTareasUrgentes() {
-    if (!mostrandoSoloUrgentes) {
+    if (mostrandoSoloUrgentes === "Tareas urgentes") {
         // Filtra las tareas por urgencia (solo las tareas con urgente=true)
         let tareasUrgentes = tareas.filter(tarea => tarea.urgente);
 
@@ -231,21 +242,18 @@ function filtroTareasUrgentes() {
         }
 
         // Cambiar el texto del botón
-        document.querySelector('button').textContent = "Mostrar todas las tareas";
+        document.querySelector("#botonFiltro").textContent = "Mostrar todas las tareas";
 
-        // Cambiar el estado de visualización a mostrar solo tareas urgentes
-       
+        
     } else {
         // Mostrar todas las tareas
         mostrarTodasLasTareas();
 
         // Cambiar el texto del botón
-        document.querySelector('button').textContent = "Tareas urgentes";
-
-        // Cambiar el estado de visualización a mostrar todas las tareas
+        
         
     }
-}
+}mostrarTodasLasTareas()
 
 // Función para mostrar todas las tareas
 function mostrarTodasLasTareas() {
@@ -255,6 +263,63 @@ function mostrarTodasLasTareas() {
     for (let tarea of tareas) {
         tareasContainer.innerHTML += printTareaCards(tarea);
     }
+
+    document.querySelector("#botonFiltro").textContent = "Tareas urgentes";
+
 }
 
 
+// Función para ordenar las tareas alfabéticamente por el campo "Asignada" y mostrar un desplegable con opciones filtradas
+function ordenarTareasYCrearDesplegable() {
+    // Crear un conjunto para almacenar valores únicos del campo "Asignada"
+    const valoresUnicosAsignada = new Set();
+
+    // Agregar valores del campo "Asignada" al conjunto
+    for (let tarea of tareas) {
+        valoresUnicosAsignada.add(tarea.asignada);
+    }
+
+    // Convertir el conjunto a un array y ordenarlo alfabéticamente
+    const valoresOrdenados = Array.from(valoresUnicosAsignada).sort();
+
+    // Obtener el elemento del desplegable del HTML
+    const desplegable = document.querySelector("#desplegableAsignada");
+
+    // Limpiar el desplegable por si tiene opciones anteriores
+    desplegable.innerHTML = "";
+
+    // Agregar una opción por cada valor único ordenado alfabéticamente
+    for (let valor of valoresOrdenados) {
+        const opcion = document.createElement("option");
+        opcion.textContent = valor;
+        desplegable.appendChild(opcion);
+    }
+
+    // Agregar un evento de cambio al desplegable para filtrar las tareas según el valor seleccionado
+    desplegable.addEventListener("change", function() {
+        const valorSeleccionado = desplegable.value;
+        filtrarTareasPorValorAsignada(valorSeleccionado);
+    });
+
+    // Filtrar las tareas por el primer valor del desplegable (si hay opciones)
+    if (valoresOrdenados.length > 0) {
+        filtrarTareasPorValorAsignada(valoresOrdenados[0]);
+    }
+}
+
+// Función para filtrar las tareas por el valor del campo "Asignada" seleccionado en el desplegable
+function filtrarTareasPorValorAsignada(valor) {
+    // Filtrar las tareas que tienen el valor seleccionado en el campo "Asignada"
+    const tareasFiltradas = tareas.filter(tarea => tarea.asignada === valor);
+
+    // Limpiar el contenedor de tareas
+    tareasContainer.innerHTML = "";
+
+    // Imprimir las tareas filtradas en el contenedor
+    for (let tarea of tareasFiltradas) {
+        tareasContainer.innerHTML += printTareaCards(tarea);
+    }
+}
+
+// Llamada a la función para ordenar las tareas y crear el desplegable al cargar la página inicialmente
+ordenarTareasYCrearDesplegable();
