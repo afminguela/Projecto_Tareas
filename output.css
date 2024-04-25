@@ -139,6 +139,10 @@
   margin-right: 10vw;
 }
 
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
 .mb-5 {
   margin-bottom: 1.25rem;
 }
@@ -157,10 +161,6 @@
 
 .mt-\[5vh\] {
   margin-top: 5vh;
-}
-
-.mb-4 {
-  margin-bottom: 1rem;
 }
 
 .flex {
@@ -203,6 +203,10 @@
   width: 16rem;
 }
 
+.w-20 {
+  width: 5rem;
+}
+
 .flex-auto {
   flex: 1 1 auto;
 }
@@ -229,14 +233,6 @@
 
 .justify-end {
   justify-content: flex-end;
-}
-
-.justify-between {
-  justify-content: space-between;
-}
-
-.justify-around {
-  justify-content: space-around;
 }
 
 .gap-5 {
@@ -285,10 +281,6 @@
 
 .bg-cuadros2 {
   background-image: url('./src/papel_cuadrados.jpg');
-}
-
-.p-5 {
-  padding: 1.25rem;
 }
 
 .px-2 {

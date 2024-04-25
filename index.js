@@ -1,12 +1,16 @@
 // ---------declaración de Variables publicas (globales)
 let tareasContainer = document.querySelector(".tareasContainer"); // div de 4 columnas donde se muestran las tareas
 let tareas = JSON.parse(localStorage.getItem("tareas")) || []; // array de tareas
-console.log("he llegado a la linea 3");
+
 let idTarea = 0; // generamos a cero el id de la tarea
 
+let boton = document.querySelector("#botonFiltro"); 
+let mostrandoSoloUrgentes = boton.textContent;
 
+console.log("todas las variables declaradas y listas para usar", mostrandoSoloUrgentes); //Chivato 1
 
 // -----------Clase Tarea declarada
+
 class Tarea {
  constructor(nombre, asignada, fecha, descripcion, urgente=false, idTarea) {
     this.nombre = nombre;
@@ -17,13 +21,16 @@ class Tarea {
     this.idTarea = idTarea;
  }
 }
-console.log("estoy antes del printTarea")
+
+console.log("estoy antes del printTarea con la clase creada") //Chivato 2
 
 
 
 
 
-// Función que imprime las tareas en el HTML
+// -------------------Función que imprime las tareas en el HTML
+
+
 function printTareaCards(objetoTarea) {
  let color = objetoTarea.urgente ? "background-color: lightcoral;" : "background-color: lightgray;"; 
  return `<div       
@@ -81,14 +88,23 @@ function printTareaCards(objetoTarea) {
  </div>`;
 }
 
-// Si hay tareas en el localStorage, las imprime
+// ------------------Si hay tareas en el localStorage, las imprime
+
+
 if (tareas) {
     for (let tarea of tareas) {
       tareasContainer.innerHTML += printTareaCards(tarea);
     }
   }
-  console.log("he pasado el print tarea", tareas);
-// Función que crea una tarea
+ 
+ 
+console.log("he pasado el print tarea y estoy listo", tareas); // Chivato 3
+
+
+
+// ------------------Función que crea una tarea en doble función
+
+
 async function submitTarea() {
 event.preventDefault();
 ++idTarea
@@ -128,7 +144,9 @@ async function afegirTarea(nuevaTarea) {
 
 }
 
-// Función que elimina una tarea
+// -----------------Función que elimina una tarea
+
+
 function eliminarTarea(idTarea) {
  let tareaABorrar = tareas.find((tareas) => tareas.idTarea === idTarea);
  console.log("Tarea a eliminar:", tareaABorrar);
@@ -146,7 +164,9 @@ function eliminarTarea(idTarea) {
 
 
 
-// Función para editar una tarea
+// ------------------Función para editar una tarea
+
+
 function editarTarea(idTarea) {
          console.log("estoy en editar tarea", idTarea)    
          // Encuentra la tarea a editar
@@ -213,23 +233,32 @@ function confirmarEdicion() {
 
 
 // Función para alternar entre mostrar todas las tareas y mostrar solo las tareas urgentes
-let boton = document.querySelector("#botonFiltro"); 
-    let mostrandoSoloUrgentes = boton.innerHTML;
+
 function alternarMostrarTareas() {
-    
+  
+console.log("he pasado el alternarMostrarTareas", mostrandoSoloUrgentes) //Chivato 4
+ console.log(mostrandoSoloUrgentes.includes("urgentes")) //Chivato 5 
+   if(mostrandoSoloUrgentes.includes("urgentes") ) {
    
-   ;
-   if (mostrandoSoloUrgentes === "Tareas urgentes") {
-        filtroTareasUrgentes();
-    } else {
+        return filtroTareasUrgentes();
+   } else if (!mostrandoSoloUrgentes.includes("urgentes") ) {
+        return mostrarTodasLasTareas();
+   }
         
-       mostrarTodasLasTareas();
-    }
+       
+   
 }
 
-// Función para filtrar y mostrar solo las tareas urgentes o mostrar todas las tareas
+
+
+
+
+
+
+// ------------Función para filtrar y mostrar solo las tareas urgentes o mostrar todas las tareas
+
 function filtroTareasUrgentes() {
-    if (mostrandoSoloUrgentes === "Tareas urgentes") {
+   
         // Filtra las tareas por urgencia (solo las tareas con urgente=true)
         let tareasUrgentes = tareas.filter(tarea => tarea.urgente);
 
@@ -238,24 +267,24 @@ function filtroTareasUrgentes() {
 
         // Imprime las tareas urgentes en el contenedor
         for (let tarea of tareasUrgentes) {
-            return tareasContainer.innerHTML += printTareaCards(tarea);
+             tareasContainer.innerHTML += printTareaCards(tarea);
         }
-
+console.log("antes de cambio",document.querySelector("#botonFiltro").textContent)
         // Cambiar el texto del botón
         document.querySelector("#botonFiltro").textContent = "Mostrar todas las tareas";
 
-        
-    } else {
-        // Mostrar todas las tareas
-        mostrarTodasLasTareas();
-
-        // Cambiar el texto del botón
-        
+console.log("despues de cambio",document.querySelector("#botonFiltro").textContent)         
+      
+      mostrandoSoloUrgentes = document.querySelector("#botonFiltro").textContent;  
         
     }
-}mostrarTodasLasTareas()
 
-// Función para mostrar todas las tareas
+mostrarTodasLasTareas()
+
+// ----------Función para mostrar todas las tareas
+
+
+
 function mostrarTodasLasTareas() {
    
     tareasContainer.innerHTML = "";
@@ -266,11 +295,13 @@ function mostrarTodasLasTareas() {
 
     document.querySelector("#botonFiltro").textContent = "Tareas urgentes";
 
+    mostrandoSoloUrgentes = document.querySelector("#botonFiltro").textContent;  
 }
 
 
-// Función para ordenar las tareas alfabéticamente por el campo "Asignada" y mostrar un desplegable con opciones filtradas
+// Función 
 function ordenarTareasYCrearDesplegable() {
+  
     // Crear un conjunto para almacenar valores únicos del campo "Asignada"
     const valoresUnicosAsignada = new Set();
 
@@ -278,7 +309,9 @@ function ordenarTareasYCrearDesplegable() {
     for (let tarea of tareas) {
         valoresUnicosAsignada.add(tarea.asignada);
     }
-
+if (valoresUnicosAsignada.size!== 0) {
+  document.querySelector(".desplegableAsignada").style.display = "inline-block"
+}
     // Convertir el conjunto a un array y ordenarlo alfabéticamente
     const valoresOrdenados = Array.from(valoresUnicosAsignada).sort();
 
@@ -307,6 +340,8 @@ function ordenarTareasYCrearDesplegable() {
     }
 }
 
+
+
 // Función para filtrar las tareas por el valor del campo "Asignada" seleccionado en el desplegable
 function filtrarTareasPorValorAsignada(valor) {
     // Filtrar las tareas que tienen el valor seleccionado en el campo "Asignada"
@@ -323,3 +358,13 @@ function filtrarTareasPorValorAsignada(valor) {
 
 // Llamada a la función para ordenar las tareas y crear el desplegable al cargar la página inicialmente
 ordenarTareasYCrearDesplegable();
+
+function cerrarDesplegable() {
+    document.querySelector(".desplegableAsignada").style.display = "none";
+}
+
+function limpiarLocalStorage() {
+    localStorage.clear();
+    tareas = [];
+    tareasContainer.innerHTML = "";
+}
