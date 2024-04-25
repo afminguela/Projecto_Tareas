@@ -4,6 +4,8 @@ let tareas = JSON.parse(localStorage.getItem("tareas")) || []; // array de tarea
 console.log("he llegado a la linea 3");
 let idTarea = 0; // generamos a cero el id de la tarea
 
+
+
 // -----------Clase Tarea declarada
 class Tarea {
  constructor(nombre, asignada, fecha, descripcion, urgente=false, idTarea) {
@@ -16,6 +18,11 @@ class Tarea {
  }
 }
 console.log("estoy antes del printTarea")
+
+
+
+
+
 // Función que imprime las tareas en el HTML
 function printTareaCards(objetoTarea) {
  let color = objetoTarea.urgente ? "background-color: lightcoral;" : "background-color: lightgray;"; 
@@ -30,14 +37,16 @@ function printTareaCards(objetoTarea) {
       border-radius: 20px;
       margin-top: 10px;
       margin-bottom: 10px;
+      margin-left: 0px;
+        margin-right: 0px;
       ${color}
     "
  >
     <div
       class="contenedor texto"
-      style=" display: flex; flex-direction: row; align-self: center; justify-content: space-around; text-overflow: clip;"
+      style=" display: flex; flex-direction: row;  justify-content: space-around; text-overflow: clip;position:relative;"
     >
-     <p class="idTarea" style="text-decoration: underline; font-weight: bold; font-size: 6vh; margin-right: 7vw;  ">${objetoTarea.idTarea}</p>
+     
       <p class="tareaNombre text-wrap">${objetoTarea.nombre}</p>
       <p class="tareaFecha" style="margin-left: 10px;">${objetoTarea.fecha}</p>
       
