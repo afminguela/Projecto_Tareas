@@ -200,3 +200,61 @@ function confirmarEdicion() {
     tareaElement.innerHTML = printTareaCards(tareaAEditar);
   
     }
+
+
+// Función para alternar entre mostrar todas las tareas y mostrar solo las tareas urgentes
+function alternarMostrarTareas() {
+    
+   let boton = document.querySelector("#botonFiltro"); 
+    let mostrandoSoloUrgentes = boton.innerHTML;
+    console.log(mostrandoSoloUrgentes);
+   if (mostrandoSoloUrgentes === "Tareas urgentes") {
+        filtroTareasUrgentes();
+    } else {
+        
+       mostrarTodasLasTareas();
+    }
+}
+
+// Función para filtrar y mostrar solo las tareas urgentes o mostrar todas las tareas
+function filtroTareasUrgentes() {
+    if (!mostrandoSoloUrgentes) {
+        // Filtra las tareas por urgencia (solo las tareas con urgente=true)
+        let tareasUrgentes = tareas.filter(tarea => tarea.urgente);
+
+        // Borra el contenido actual del contenedor de tareas
+        tareasContainer.innerHTML = "";
+
+        // Imprime las tareas urgentes en el contenedor
+        for (let tarea of tareasUrgentes) {
+            return tareasContainer.innerHTML += printTareaCards(tarea);
+        }
+
+        // Cambiar el texto del botón
+        document.querySelector('button').textContent = "Mostrar todas las tareas";
+
+        // Cambiar el estado de visualización a mostrar solo tareas urgentes
+       
+    } else {
+        // Mostrar todas las tareas
+        mostrarTodasLasTareas();
+
+        // Cambiar el texto del botón
+        document.querySelector('button').textContent = "Tareas urgentes";
+
+        // Cambiar el estado de visualización a mostrar todas las tareas
+        
+    }
+}
+
+// Función para mostrar todas las tareas
+function mostrarTodasLasTareas() {
+   
+    tareasContainer.innerHTML = "";
+
+    for (let tarea of tareas) {
+        tareasContainer.innerHTML += printTareaCards(tarea);
+    }
+}
+
+
