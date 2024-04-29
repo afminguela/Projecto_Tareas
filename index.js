@@ -1,8 +1,8 @@
 // ---------declaración de Variables publicas (globales)
 
 let tareasContainer = document.querySelector(".tareasContainer"); // div de 4 columnas donde se muestran las tareas
-let tareas = JSON.parse(localStorage.getItem("tareas")) || []; // array de tareas
-
+//***** let tareas = JSON.parse(localStorage.getItem("tareas")) || []; // array de tareas en localStorage
+let tareas= JSON.parse(taskDB.get("tareas"))
 let idTarea = 0; // generamos a cero el id de la tarea
 
 let boton = document.querySelector("#botonFiltro"); 
@@ -130,7 +130,8 @@ console.log(tareaNombre, tareaAsignada, tareaFecha, tareaDescripcion, tareaUrgen
 
 async function afegirTarea(nuevaTarea) {
  tareas.push(nuevaTarea);
- localStorage.setItem("tareas", JSON.stringify(tareas));
+ localStorage.setItem("tareas", JSON.stringify(tareas)); ****LA BUENA****
+
  // Actualiza el DOM para reflejar la nueva tarea
  tareasContainer.innerHTML += printTareaCards(nuevaTarea);
     // Limpia los campos del formulario
