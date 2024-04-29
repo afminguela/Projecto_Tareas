@@ -23,9 +23,7 @@
   <body class="mx-[10vw] bg-cuadros2">
     <h1
       class="font-indie-flower font-extrabold text-8xl text-blue-800"
-      style="text-align: center;
-      text-decoration: underline;
-     "
+      style="text-align: center; text-decoration: underline"
     >
       Tareas pendientes
     </h1>
@@ -122,29 +120,36 @@
         >
           <span class="">Anotar!</span>
         </button>
-        
       </div>
     </form>
 
-    <!-- llega hasta aqui,-->
+    <!-- Aqui va lo extra,-->
+       
+    <!--Botón tareas Urgentes, Desplegable asignada y el form de edición -->
 
     <hr class="border-blue-800 border-2" />
-    <div class="flex flex-row gap-5 mb-4">
-    <button
-    id="botonFiltro"
-    class="filtro w-40 h-11  rounded-lg border bg-zinc-300 hover:bg-red-400 hover:text-white text-blue-800 text-red-800 text-3xl font-indie-flower"
-    onClick="alternarMostrarTareas()" 
-  >
-    Tareas urgentes
-  </button> 
 
-  
-  <div class="desplegableAsignada" style="display:none">
-  <label for="desplegableAsignada"class="texto">Filtrar por asignada</label>
-   <select id="desplegableAsignada" class="w-40 pl-5 texto rounded-lg bg-zinc-300 border" onclick="cerrarDesplegable()"></select>
-  </div>
-</div>
-    <!-- aqui se renderiza un formulario que aparece para actualizar datos -->
+    <div class="flex flex-row gap-5 mb-4">
+      <button
+        id="botonFiltro"
+        class="filtro w-40 h-11 rounded-lg border bg-zinc-300 hover:bg-red-400 hover:text-white text-blue-800 text-red-800 text-3xl font-indie-flower"
+        onClick="alternarMostrarTareas()"
+      >
+        Tareas urgentes
+      </button>
+
+      <div class="desplegableAsignada" style="display: none">
+        <label for="desplegableAsignada" class="texto"
+          >Filtrar por asignada</label
+        >
+        <select
+          id="desplegableAsignada"
+          class="w-40 pl-5 texto rounded-lg bg-zinc-300 border"
+          oncontextmenu="cerrarDesplegable()"
+        ></select>
+      </div>
+    </div>
+           <!-- Aquí se renderiza un formulario que aparece para actualizar datos -->
     <form
       id="formEditarTarea"
       class="formEditarTarea texto font-indie-flower"
@@ -153,33 +158,39 @@
       <input
         type="text"
         id="nombreEditar"
-        class="nombreEditar rounded-lg bg-zinc-300 text-blue-800 font-indie-flower border "
+        class="nombreEditar rounded-lg bg-zinc-300 text-blue-800 font-indie-flower border"
         placeholder="Nombre"
       />
       <input
         type="text"
         id="asignadaEditar"
-        class="asignadaEditar rounded-lg bg-zinc-300 text-blue-800 font-indie-flower border "
+        class="asignadaEditar rounded-lg bg-zinc-300 text-blue-800 font-indie-flower border"
         placeholder="Asignada a"
       />
-      <input type="date" id="fechaEditar" class="fechaEditar rounded-lg bg-zinc-300 text-blue-800 font-indie-flower border " />
+      <input
+        type="date"
+        id="fechaEditar"
+        class="fechaEditar rounded-lg bg-zinc-300 text-blue-800 font-indie-flower border"
+      />
       <textarea
         id="descripcionEditar"
-        class="descripcionEditar rounded-lg bg-zinc-300 text-blue-800 font-indie-flower mt-[2vh] border "
-        rows="4"; cols="50;"
+        class="descripcionEditar rounded-lg bg-zinc-300 text-blue-800 font-indie-flower mt-[2vh] border"
+        rows="4"
+        ;
+        cols="50;"
         placeholder="Descripción"
       ></textarea>
       <button
         type="button"
-        class="BotonEditar w-40 h-8 ml-3  rounded-lg border bg-zinc-300 hover:bg-blue-400 hover:text-white text-blue-800 text-blue-800 text-8xl-3 font-indie-flower  text-center text"
+        class="BotonEditar w-40 h-8 ml-3 rounded-lg border bg-zinc-300 hover:bg-blue-400 hover:text-white text-blue-800 text-blue-800 text-8xl-3 font-indie-flower text-center text"
         onclick="confirmarEdicion()"
       >
         Confirmar
       </button>
-      <hr class="border-blue-800 border-2" />
+      
     </form>
-
-    <!-- aqui se renderizan las tareas-->
+    <hr class="border-blue-800 border-2" />
+    <!-- Aquí se renderizan las tareas-->
 
     <div
       class="tareasContainer flex flex-col flex-initial space-x-4 text-blue-800 text-lg texto"
@@ -228,6 +239,7 @@
 
     <script type="text/javascript" src="./index.js"></script>
   </body>
+
   <footer class="footer text-center">
     <p class="text-blue-800 text-3xl font-normal font-indie-flower">
       © 2024 Ana Fdez Minguela

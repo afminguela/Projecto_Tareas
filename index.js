@@ -1,4 +1,5 @@
 // ---------declaración de Variables publicas (globales)
+
 let tareasContainer = document.querySelector(".tareasContainer"); // div de 4 columnas donde se muestran las tareas
 let tareas = JSON.parse(localStorage.getItem("tareas")) || []; // array de tareas
 
@@ -284,7 +285,6 @@ mostrarTodasLasTareas()
 // ----------Función para mostrar todas las tareas
 
 
-
 function mostrarTodasLasTareas() {
    
     tareasContainer.innerHTML = "";
@@ -299,7 +299,9 @@ function mostrarTodasLasTareas() {
 }
 
 
-// Función 
+// -----------Función ordenar tareas y crear desplegable
+
+
 function ordenarTareasYCrearDesplegable() {
   
     // Crear un conjunto para almacenar valores únicos del campo "Asignada"
@@ -342,7 +344,7 @@ if (valoresUnicosAsignada.size!== 0) {
 
 
 
-// Función para filtrar las tareas por el valor del campo "Asignada" seleccionado en el desplegable
+// ------------Función para filtrar las tareas por el valor del campo "Asignada" seleccionado en el desplegable
 function filtrarTareasPorValorAsignada(valor) {
     // Filtrar las tareas que tienen el valor seleccionado en el campo "Asignada"
     const tareasFiltradas = tareas.filter(tarea => tarea.asignada === valor);
@@ -356,8 +358,9 @@ function filtrarTareasPorValorAsignada(valor) {
     }
 }
 
-// Llamada a la función para ordenar las tareas y crear el desplegable al cargar la página inicialmente
+    // Llamada a la función para ordenar las tareas y crear el desplegable al cargar la página inicialmente
 ordenarTareasYCrearDesplegable();
+
 
 function cerrarDesplegable() {
     document.querySelector(".desplegableAsignada").style.display = "none";
