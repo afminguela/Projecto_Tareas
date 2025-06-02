@@ -5,7 +5,11 @@
   "license": "Proprietary",
   "scripts": {
     "start": "npx tailwindcss -i ./input.css -o ./output.css --watch",
+<<<<<<< HEAD
     "api": "json-server taskDB.json"
+=======
+    "api":"npx json-server tareas.json"
+>>>>>>> dev
   },
   "devDependencies": {
     "prettier-plugin-tailwindcss": "^0.1.7",

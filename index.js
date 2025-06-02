@@ -3,6 +3,24 @@
 let tareasContainer = document.querySelector(".tareasContainer"); // div de 4 columnas donde se muestran las tareas
 //***** let tareas = JSON.parse(localStorage.getItem("tareas")) || []; // array de tareas en localStorage
 let tareas= JSON.parse(taskDB.get("tareas"))
+let tareas = JSON.parse(localStorage.getItem("tareas")) || []; // array de tareas
+
+async function obtenerTareas() {
+  const response = await fetch('http://localhost:3000/tareas');
+  const data = await response.json();
+  console.log(data)
+  return data;
+ }
+
+ document.addEventListener('DOMContentLoaded', async () => {
+  tareas = await obtenerTareas();
+  for (let tarea of tareas) {
+     tareasContainer.innerHTML += printTareaCards(tarea);
+  }
+  ordenarTareasYCrearDesplegable();
+ });
+ 
+
 let idTarea = 0; // generamos a cero el id de la tarea
 
 let boton = document.querySelector("#botonFiltro"); 
@@ -106,64 +124,64 @@ console.log("he pasado el print tarea y estoy listo", tareas); // Chivato 3
 // ------------------Función que crea una tarea en doble función
 
 
-async function submitTarea() {
-event.preventDefault();
-++idTarea
-let tareaNombre = document.querySelector(".tareaNombre").value; //captura de datos
-let tareaAsignada = document.querySelector(".tareaAsignada").value;
-let tareaFecha = document.querySelector(".tareaFecha").value;
-let tareaDescripcion = document.querySelector(".tareaDescripcion").value;
-let tareaUrgente = document.querySelector(".tareaUrgente").checked;
-console.log(tareaNombre, tareaAsignada, tareaFecha, tareaDescripcion, tareaUrgente, idTarea);
+function submitTarea() {
+  event.preventDefault();
+  ++idTarea
+  let tareaNombre = document.querySelector(".tareaNombre").value; //captura de datos
+  let tareaAsignada = document.querySelector(".tareaAsignada").value;
+  let tareaFecha = document.querySelector(".tareaFecha").value;
+  let tareaDescripcion = document.querySelector(".tareaDescripcion").value;
+  let tareaUrgente = document.querySelector(".tareaUrgente").checked;
+  console.log(tareaNombre, tareaAsignada, tareaFecha, tareaDescripcion, tareaUrgente, idTarea);
 
- const objetoTarea = new Tarea(
+  const objetoTarea = new Tarea(
     tareaNombre,
     tareaAsignada,
     tareaFecha,
     tareaDescripcion,
     tareaUrgente,
     idTarea
- );
- console.log(objetoTarea);
- await afegirTarea(objetoTarea);
+  );
+  console.log(objetoTarea);
+  afegirTarea(objetoTarea);
 }
 
-async function afegirTarea(nuevaTarea) {
- tareas.push(nuevaTarea);
- localStorage.setItem("tareas", JSON.stringify(tareas)); ****LA BUENA****
 
- // Actualiza el DOM para reflejar la nueva tarea
- tareasContainer.innerHTML += printTareaCards(nuevaTarea);
-    // Limpia los campos del formulario
-    document.querySelector(".tareaNombre").value = "";
-    document.querySelector(".tareaAsignada").value = "";
-    document.querySelector(".tareaFecha").value = "";
-    document.querySelector(".tareaDescripcion").value = "";
-    document.querySelector(".tareaUrgente").checked = false;
-    
-    // Llama a la función para ordenar las tareas y crear el desplegable;
-    ordenarTareasYCrearDesplegable()
 
+function afegirTarea(nuevaTarea) {
+  tareas.push(nuevaTarea);
+  localStorage.setItem("tareas", JSON.stringify(tareas));
+  // Actualiza el DOM para reflejar la nueva tarea
+  tareasContainer.innerHTML += printTareaCards(nuevaTarea);
+  // Limpia los campos del formulario
+  document.querySelector(".tareaNombre").value = "";
+  document.querySelector(".tareaAsignada").value = "";
+  document.querySelector(".tareaFecha").value = "";
+  document.querySelector(".tareaDescripcion").value = "";
+  document.querySelector(".tareaUrgente").checked = false;
+  
+  // Llama a la función para ordenar las tareas y crear el desplegable;
+  ordenarTareasYCrearDesplegable()
 }
+
 
 // -----------------Función que elimina una tarea
 
 
 function eliminarTarea(idTarea) {
- let tareaABorrar = tareas.find((tareas) => tareas.idTarea === idTarea);
- console.log("Tarea a eliminar:", tareaABorrar);
+  let tareaABorrar = tareas.find((tareas) => tareas.idTarea === idTarea);
+  console.log("Tarea a eliminar:", tareaABorrar);
 
- tareas = tareas.filter((tarea) => tarea.idTarea !== idTarea);
- console.log("Tareas después de eliminar:", tareas);
- tareas.splice(tareaABorrar, 1);
- localStorage.setItem("tareas", JSON.stringify(tareas));
+  tareas = tareas.filter((tarea) => tarea.idTarea !== idTarea);
+  console.log("Tareas después de eliminar:", tareas);
+  tareas.splice(tareaABorrar, 1);
+  localStorage.setItem("tareas", JSON.stringify(tareas));
 
- let tareaElement = document.querySelector(`.ObjetoTarea[data-id="${idTarea}"]`);
- if (tareaElement) {
-     tareaElement.remove();
- }
+  let tareaElement = document.querySelector(`.ObjetoTarea[data-id="${idTarea}"]`);
+  if (tareaElement) {
+      tareaElement.remove();
+  }
 }
-
 
 
 // ------------------Función para editar una tarea
@@ -190,49 +208,45 @@ function editarTarea(idTarea) {
 }
 
 function confirmarEdicion() {
-    // Obtiene el ID de la tarea que se está editando
-    idTarea = document.querySelector(".formEditarTarea").dataset.idTareaEditada;
-    console.log("ID de la tarea a editar:", idTarea);
-    // Encuentra la tarea a editar
-    let tareas2 = [...tareas];
-    console.log("Tareas:", tareas2);
-    let tareaAEditar = [];
-   // tareaAEditar = tareas2.find((tarea) => tarea.idTarea == idTarea);
-    for (let tarea of tareas2) {
-        if (tarea.idTarea == idTarea) {
-            tareaAEditar = tarea;
-            break;
-        }
-    }
-    
-    
-    console.log("Tarea siendo editada:", tareaAEditar);
-    
-    // Verifica si la tarea existe antes de intentar actualizarla
-    if (!tareaAEditar) {
-       console.error("Tarea no encontrada");
-       return;
-    }
-   
-    // Actualiza la tarea con los nuevos valores
-    tareaAEditar.nombre = document.querySelector(".nombreEditar").value;
-    tareaAEditar.asignada = document.querySelector(".asignadaEditar").value;
-    tareaAEditar.fecha = document.querySelector(".fechaEditar").value;
-    tareaAEditar.descripcion = document.querySelector(".descripcionEditar").value;
- 
-    // Guarda la tarea actualizada en el array de tareas
-    localStorage.setItem("tareas", JSON.stringify(tareas));
- 
-    // Oculta el formulario
-    document.querySelector(".formEditarTarea").style.display = "none";
- 
-    // Actualiza el DOM para reflejar los cambios en la tarea
-    let tareaElement = document.querySelector(`.ObjetoTarea[data-id="${idTarea}"]`);
-       
-    tareaElement.innerHTML = printTareaCards(tareaAEditar);
+  // Obtiene el ID de la tarea que se está editando
+  idTarea = document.querySelector(".formEditarTarea").dataset.idTareaEditada;
+  console.log("ID de la tarea a editar:", idTarea);
+  // Encuentra la tarea a editar
+  let tareas2 = [...tareas];
+  console.log("Tareas:", tareas2);
+  let tareaAEditar = [];
+  for (let tarea of tareas2) {
+      if (tarea.idTarea == idTarea) {
+          tareaAEditar = tarea;
+          break;
+      }
+  }
   
-    }
+  console.log("Tarea siendo editada:", tareaAEditar);
+  
+  // Verifica si la tarea existe antes de intentar actualizarla
+  if (!tareaAEditar) {
+     console.error("Tarea no encontrada");
+     return;
+  }
+ 
+  // Actualiza la tarea con los nuevos valores
+  tareaAEditar.nombre = document.querySelector(".nombreEditar").value;
+  tareaAEditar.asignada = document.querySelector(".asignadaEditar").value;
+  tareaAEditar.fecha = document.querySelector(".fechaEditar").value;
+  tareaAEditar.descripcion = document.querySelector(".descripcionEditar").value;
 
+  // Guarda la tarea actualizada en el array de tareas
+  localStorage.setItem("tareas", JSON.stringify(tareas));
+
+  // Oculta el formulario
+  document.querySelector(".formEditarTarea").style.display = "none";
+
+  // Actualiza el DOM para reflejar los cambios en la tarea
+  let tareaElement = document.querySelector(`.ObjetoTarea[data-id="${idTarea}"]`);
+     
+  tareaElement.innerHTML = printTareaCards(tareaAEditar);
+}
 
 // Función para alternar entre mostrar todas las tareas y mostrar solo las tareas urgentes
 
@@ -367,8 +381,9 @@ function cerrarDesplegable() {
     document.querySelector(".desplegableAsignada").style.display = "none";
 }
 
-function limpiarLocalStorage() {
-    localStorage.clear();
-    tareas = [];
-    tareasContainer.innerHTML = "";
+function limpiarTareas() {
+  localStorage.clear();
+  tareas = [];
+  tareasContainer.innerHTML = "";
 }
+
